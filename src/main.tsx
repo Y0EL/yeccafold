@@ -9,6 +9,18 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   </StrictMode>
 )
 
+const heroShell = document.getElementById('hero-shell')
+if (heroShell) {
+  requestAnimationFrame(() =>
+    requestAnimationFrame(() => {
+      window.setTimeout(() => {
+        heroShell.classList.add('hidden')
+        window.setTimeout(() => heroShell.remove(), 500)
+      }, 220)
+    })
+  )
+}
+
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/sw.js').catch(() => {})

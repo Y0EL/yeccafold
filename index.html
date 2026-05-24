@@ -8,6 +8,47 @@
     <link rel="manifest" href="/site.webmanifest" />
     <meta name="theme-color" content="#080604" />
     <title>yeccafold. Platform Manajemen KOL</title>
+    <style>
+      #hero-shell {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        background: #080604;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 0 24px;
+        transition: opacity 0.45s ease;
+      }
+      #hero-shell.hidden { opacity: 0; pointer-events: none; }
+      #hero-shell .l1 {
+        font-family: Georgia, 'Times New Roman', serif;
+        color: rgba(245, 240, 232, 0.56);
+        font-size: clamp(20px, 3.2vw, 48px);
+        letter-spacing: -0.02em; line-height: 1; margin-bottom: 0.1em;
+      }
+      #hero-shell .l2 {
+        font-family: Georgia, 'Times New Roman', serif;
+        color: #f5f0e8;
+        font-size: clamp(76px, 15vw, 210px);
+        letter-spacing: -0.055em; line-height: 0.82;
+      }
+      #hero-shell .l3 {
+        font-family: Georgia, 'Times New Roman', serif;
+        color: #f5f0e8;
+        font-size: clamp(40px, 6.5vw, 96px);
+        letter-spacing: -0.04em; line-height: 0.9; margin-top: 0.05em;
+      }
+      #hero-shell .l4 {
+        font-family: Georgia, 'Times New Roman', serif; font-style: italic;
+        color: #c4933f;
+        font-size: clamp(36px, 5.8vw, 84px);
+        line-height: 1.25; margin-top: 0.1em;
+      }
+    </style>
+    <noscript><style>#hero-shell { display: none; }</style></noscript>
     <meta name="description" content="Platform manajemen KOL yang menyatukan reachout hingga pembayaran dalam satu alur kerja yang terukur. Tim KOL bekerja 90 persen lebih cepat, tanpa kekacauan WhatsApp." />
 
     <meta property="og:type" content="website" />
@@ -35,6 +76,12 @@
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Dancing+Script:wght@700&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" /></noscript>
   </head>
   <body>
+    <div id="hero-shell" aria-hidden="true">
+      <div class="l1">The Future of</div>
+      <div class="l2">KOL</div>
+      <div class="l3">Management.</div>
+      <div class="l4">Made Efficient.</div>
+    </div>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
     <form name="demo-request" netlify netlify-honeypot="bot-field" hidden>
