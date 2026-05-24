@@ -1,0 +1,221 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --c-bg: #080604;
+  --c-bg-card: rgba(18,14,8,0.90);
+  --c-text: #f5f0e8;
+  --c-text-muted: rgba(245,240,232,0.42);
+  --c-text-dim: rgba(245,240,232,0.20);
+  --c-border: rgba(255,255,255,0.09);
+  --c-border-subtle: rgba(255,255,255,0.055);
+  --c-card-shadow: 0 40px 100px rgba(0,0,0,0.80), 0 0 140px 24px rgba(196,147,63,0.08);
+  --c-btn-bg: #f5f0e8;
+  --c-btn-text: #080604;
+  --c-ghost-border: rgba(255,255,255,0.13);
+  --c-ghost-text: rgba(245,240,232,0.55);
+  --c-divider: rgba(255,255,255,0.07);
+  --c-pipeline-empty: rgba(255,255,255,0.08);
+  --c-nav-scrolled: rgba(8,6,4,0.84);
+  --c-nav-border: rgba(255,255,255,0.055);
+  --c-badge-bg: rgba(196,147,63,0.08);
+  --c-badge-border: rgba(196,147,63,0.22);
+  --c-badge-text: rgba(245,240,232,0.50);
+  --c-orb-1: rgba(196,147,63,0.08);
+  --c-orb-2: rgba(160,100,30,0.06);
+  --c-invoice-strip: rgba(196,147,63,0.05);
+  --c-accent: #c4933f;
+  --c-accent-light: #e2b865;
+  --c-dot-grid: rgba(196,147,63,0.13);
+  --c-illus-bg: rgba(255,255,255,0.10);
+  --c-illus-border: rgba(255,255,255,0.16);
+  --c-illus-card: rgba(255,255,255,0.08);
+  --c-illus-card-border: rgba(255,255,255,0.12);
+  --c-compare-panel: rgba(12,10,6,0.97);
+  --c-compare-chat-bg: rgba(255,255,255,0.07);
+  --c-compare-chat-border: rgba(255,255,255,0.12);
+  --c-compare-bubble-other: rgba(255,255,255,0.12);
+  --c-compare-bubble-border: rgba(255,255,255,0.14);
+  --c-compare-text: rgba(245,240,232,0.90);
+  --c-compare-text-muted: rgba(245,240,232,0.65);
+  --c-compare-text-dim: rgba(245,240,232,0.32);
+}
+
+:root.light {
+  --c-bg: #faf7f2;
+  --c-bg-card: #ffffff;
+  --c-text: #1a1208;
+  --c-text-muted: rgba(26,18,8,0.42);
+  --c-text-dim: rgba(26,18,8,0.20);
+  --c-border: rgba(0,0,0,0.07);
+  --c-border-subtle: rgba(0,0,0,0.05);
+  --c-card-shadow: 0 4px 24px rgba(0,0,0,0.06), 0 20px 60px rgba(196,147,63,0.08), 0 0 0 1px rgba(255,255,255,0.8);
+  --c-btn-bg: #1a1208;
+  --c-btn-text: #faf7f2;
+  --c-ghost-border: rgba(26,18,8,0.12);
+  --c-ghost-text: rgba(26,18,8,0.50);
+  --c-divider: rgba(26,18,8,0.08);
+  --c-pipeline-empty: rgba(26,18,8,0.10);
+  --c-nav-scrolled: rgba(250,247,242,0.90);
+  --c-nav-border: rgba(0,0,0,0.06);
+  --c-badge-bg: rgba(196,147,63,0.07);
+  --c-badge-border: rgba(196,147,63,0.20);
+  --c-badge-text: rgba(26,18,8,0.50);
+  --c-orb-1: rgba(196,147,63,0.07);
+  --c-orb-2: rgba(160,100,30,0.05);
+  --c-invoice-strip: rgba(196,147,63,0.04);
+  --c-accent: #b07d28;
+  --c-accent-light: #c9972d;
+  --c-dot-grid: rgba(26,18,8,0.07);
+  --c-illus-bg: rgba(26,18,8,0.04);
+  --c-illus-border: rgba(26,18,8,0.09);
+  --c-illus-card: rgba(26,18,8,0.04);
+  --c-illus-card-border: rgba(26,18,8,0.09);
+  --c-compare-panel: var(--c-bg-card);
+  --c-compare-chat-bg: rgba(0,0,0,0.04);
+  --c-compare-chat-border: rgba(0,0,0,0.08);
+  --c-compare-bubble-other: rgba(0,0,0,0.05);
+  --c-compare-bubble-border: rgba(0,0,0,0.08);
+  --c-compare-text: rgba(26,18,8,0.88);
+  --c-compare-text-muted: rgba(26,18,8,0.58);
+  --c-compare-text-dim: rgba(26,18,8,0.30);
+}
+
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--c-bg);
+    color: var(--c-text);
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    transition: background-color 0.35s ease, color 0.35s ease;
+  }
+
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--c-bg);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--c-border);
+    border-radius: 3px;
+  }
+}
+
+@layer utilities {
+  .dot-grid {
+    background-image: radial-gradient(
+      circle,
+      var(--c-border-subtle) 1px,
+      transparent 1px
+    );
+    background-size: 28px 28px;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .features-tall { height: 100%; }
+
+  @media (min-width: 1024px) {
+    .features-grid {
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: auto auto auto;
+    }
+    .features-tall  { grid-row: 1 / 3; grid-column: 1; }
+    .features-c2r1  { grid-column: 2;  grid-row: 1; }
+    .features-c3r1  { grid-column: 3;  grid-row: 1; }
+    .features-c2r2  { grid-column: 2;  grid-row: 2; }
+    .features-c3r2  { grid-column: 3;  grid-row: 2; }
+    .features-wide  { grid-column: 1 / 4; grid-row: 3; }
+  }
+
+  @keyframes marquee-fwd {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  @keyframes marquee-rev {
+    from { transform: translateX(-50%); }
+    to   { transform: translateX(0); }
+  }
+
+  .marquee-fwd {
+    animation: marquee-fwd 28s linear infinite;
+  }
+
+  .marquee-rev {
+    animation: marquee-rev 32s linear infinite;
+  }
+
+  .marquee-fwd:hover,
+  .marquee-rev:hover {
+    animation-play-state: paused;
+  }
+
+  @keyframes pulse-dot {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(34,197,94,0.4); }
+    50%       { box-shadow: 0 0 0 5px rgba(34,197,94,0); }
+  }
+
+  .animate-pulse-dot {
+    animation: pulse-dot 2s ease-in-out infinite;
+  }
+
+  @keyframes ring-pulse {
+    0%   { transform: scale(1);    opacity: 0.8; }
+    100% { transform: scale(1.12); opacity: 0;   }
+  }
+
+  .hero-blob {
+    position: absolute;
+    border-radius: 50%;
+    will-change: transform;
+    pointer-events: none;
+  }
+
+  @keyframes blob-drift-1 {
+    0%   { transform: translate(0px, 0px) scale(1); }
+    33%  { transform: translate(40px, -28px) scale(1.06); }
+    66%  { transform: translate(-20px, 18px) scale(0.96); }
+    100% { transform: translate(0px, 0px) scale(1); }
+  }
+
+  @keyframes blob-drift-2 {
+    0%   { transform: translate(0px, 0px) scale(1); }
+    33%  { transform: translate(-36px, 24px) scale(1.04); }
+    66%  { transform: translate(22px, -16px) scale(0.97); }
+    100% { transform: translate(0px, 0px) scale(1); }
+  }
+
+  @keyframes blob-drift-3 {
+    0%   { transform: translate(0px, 0px) scale(1); }
+    50%  { transform: translate(28px, -20px) scale(1.05); }
+    100% { transform: translate(0px, 0px) scale(1); }
+  }
+
+  @keyframes blob-drift-4 {
+    0%   { transform: translate(0px, 0px) scale(1); }
+    40%  { transform: translate(-18px, 30px) scale(1.08); }
+    80%  { transform: translate(14px, -12px) scale(0.94); }
+    100% { transform: translate(0px, 0px) scale(1); }
+  }
+
+}

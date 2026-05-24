@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Invoice | yeccafold</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --bg:#080604;
+  --bg-card:#0d0a06;
+  --bg-row:rgba(196,147,63,0.04);
+  --text:#f5f0e8;
+  --text-muted:rgba(245,240,232,0.48);
+  --text-dim:rgba(245,240,232,0.28);
+  --border:rgba(196,147,63,0.18);
+  --divider:rgba(245,240,232,0.07);
+  --gold:#c4933f;
+  --gold-b:#e2b865;
+  --gold-faint:rgba(196,147,63,0.07);
+  --gold-dim:rgba(196,147,63,0.28);
+  --green:#22c55e;
+  --shadow:0 32px 80px rgba(0,0,0,0.55),0 0 0 1px rgba(196,147,63,0.07),inset 0 1px 0 rgba(196,147,63,0.09);
+}
+
+:root.light{
+  --bg:#faf7f2;
+  --bg-card:#ffffff;
+  --bg-row:rgba(196,147,63,0.04);
+  --text:#1a1208;
+  --text-muted:rgba(26,18,8,0.52);
+  --text-dim:rgba(26,18,8,0.32);
+  --border:rgba(196,147,63,0.22);
+  --divider:rgba(26,18,8,0.07);
+  --gold:#b07d28;
+  --gold-b:#c9972d;
+  --gold-faint:rgba(196,147,63,0.06);
+  --gold-dim:rgba(196,147,63,0.18);
+  --shadow:0 8px 32px rgba(0,0,0,0.07),0 0 0 1px rgba(196,147,63,0.14);
+}
+
+html{scroll-behavior:smooth}
+
+body{
+  font-family:'Outfit',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+  transition:background 0.3s ease,color 0.3s ease;
+}
+
+.shell{display:flex;min-height:100vh}
+
+.sidebar{
+  width:244px;
+  flex-shrink:0;
+  background:#080604;
+  border-right:1px solid rgba(196,147,63,0.10);
+  display:flex;
+  flex-direction:column;
+  position:sticky;
+  top:0;
+  height:100vh;
+  overflow-y:auto;
+  scrollbar-width:none;
+}
+.sidebar::-webkit-scrollbar{display:none}
+
+.sb-head{
+  padding:26px 20px 18px;
+  border-bottom:1px solid rgba(196,147,63,0.08);
+  flex-shrink:0;
+}
+
+.sb-wordmark{
+  font-family:'Cormorant Garamond',serif;
+  font-size:22px;
+  font-weight:400;
+  color:#c4933f;
+  letter-spacing:0.03em;
+  line-height:1;
+  display:block;
+}
+
+.sb-subtitle{
+  font-size:9px;
+  font-weight:600;
+  letter-spacing:0.18em;
+  text-transform:uppercase;
+  color:rgba(245,240,232,0.22);
+  margin-top:4px;
+  display:block;
+}
+
+.sb-user{
+  padding:12px 14px;
+  margin:14px 12px 0;
+  background:rgba(196,147,63,0.06);
+  border:1px solid rgba(196,147,63,0.11);
+  border-radius:12px;
+  flex-shrink:0;
+}
+
+.sb-user-row{display:flex;align-items:center;gap:10px}
+
+.sb-avatar{
+  width:32px;
+  height:32px;
+  border-radius:50%;
+  background:rgba(196,147,63,0.18);
+  border:1.5px solid rgba(196,147,63,0.28);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-shrink:0;
+  font-size:11px;
+  font-weight:700;
+  color:#c4933f;
+  font-family:'Outfit',sans-serif;
+  letter-spacing:0;
+}
+
+.sb-user-name{
+  font-size:12px;
+  font-weight:600;
+  color:#f5f0e8;
+  display:flex;
+  align-items:center;
+  gap:6px;
+  line-height:1.2;
+}
+
+.sb-online{
+  width:6px;height:6px;
+  border-radius:50%;
+  background:#22c55e;
+  box-shadow:0 0 6px rgba(34,197,94,0.55);
+  flex-shrink:0;
+}
+
+.sb-user-role{
+  font-size:9.5px;
+  color:rgba(245,240,232,0.32);
+  font-weight:500;
+  margin-top:2px;
+  text-transform:uppercase;
+  letter-spacing:0.06em;
+}
+
+.sb-nav{
+  flex:1;
+  padding:16px 12px;
+  display:flex;
+  flex-direction:column;
+  gap:1px;
+  overflow-y:auto;
+  scrollbar-width:none;
+}
+.sb-nav::-webkit-scrollbar{display:none}
+
+.sb-group-label{
+  font-size:9px;
+  font-weight:700;
+  letter-spacing:0.16em;
+  text-transform:uppercase;
+  color:rgba(245,240,232,0.20);
+  padding:0 8px;
+  margin-top:14px;
+  margin-bottom:3px;
+}
+
+.sb-item{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  padding:9px 10px;
+  border-radius:8px;
+  text-decoration:none;
+  color:rgba(245,240,232,0.48);
+  font-size:12.5px;
+  font-weight:500;
+  font-family:'Outfit',sans-serif;
+  transition:all 0.14s ease;
+  cursor:pointer;
+  border:none;
+  background:transparent;
+  width:100%;
+  text-align:left;
+  line-height:1;
+}
+
+.sb-item:hover{
+  color:rgba(245,240,232,0.78);
+  background:rgba(255,255,255,0.04);
+}
+
+.sb-item.active{
+  color:#c4933f;
+  background:rgba(196,147,63,0.11);
+  font-weight:600;
+}
+
+.sb-item svg{flex-shrink:0}
+
+.sb-foot{
+  padding:14px 12px;
+  border-top:1px solid rgba(196,147,63,0.08);
+  flex-shrink:0;
+}
+
+.sb-inv-card{
+  background:rgba(196,147,63,0.06);
+  border:1px solid rgba(196,147,63,0.13);
+  border-radius:10px;
+  padding:12px 13px;
+}
+
+.sb-inv-card-label{
+  font-size:9px;
+  font-weight:700;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  color:rgba(196,147,63,0.65);
+  margin-bottom:7px;
+}
+
+.sb-inv-card-id{
+  font-family:'DM Mono',monospace;
+  font-size:10px;
+  color:rgba(245,240,232,0.75);
+  letter-spacing:0.04em;
+  margin-bottom:7px;
+}
+
+.sb-inv-card-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.sb-inv-card-total{
+  font-family:'DM Mono',monospace;
+  font-size:12px;
+  font-weight:500;
+  color:#c4933f;
+}
+
+.sb-badge-lunas{
+  display:inline-flex;
+  align-items:center;
+  gap:4px;
+  padding:2px 8px;
+  border-radius:100px;
+  background:rgba(34,197,94,0.10);
+  border:1px solid rgba(34,197,94,0.22);
+  font-size:8px;
+  font-weight:700;
+  letter-spacing:0.12em;
+  color:#22c55e;
+}
+
+.main{
+  flex:1;
+  min-width:0;
+  display:flex;
+  flex-direction:column;
+  background:var(--bg);
+  transition:background 0.3s ease;
+}
+
+.topbar{
+  position:sticky;
+  top:0;
+  z-index:100;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:12px 32px;
+  background:rgba(8,6,4,0.84);
+  backdrop-filter:blur(24px);
+  -webkit-backdrop-filter:blur(24px);
+  border-bottom:1px solid var(--border);
+  transition:background 0.3s ease,border-color 0.3s ease;
+}
+
+:root.light .topbar{
+  background:rgba(250,247,242,0.90);
+}
+
+.tb-crumb{
+  font-family:'DM Mono',monospace;
+  font-size:10px;
+  color:var(--text-dim);
+  letter-spacing:0.07em;
+  text-transform:uppercase;
+}
+
+.tb-right{display:flex;align-items:center;gap:10px}
+
+.btn-theme{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:32px;
+  height:32px;
+  border-radius:8px;
+  background:transparent;
+  border:1px solid var(--border);
+  color:var(--text-muted);
+  cursor:pointer;
+  transition:all 0.16s ease;
+  flex-shrink:0;
+}
+
+.btn-theme:hover{
+  background:var(--gold-faint);
+  color:var(--gold);
+  border-color:var(--gold-dim);
+}
+
+.btn-dl{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  padding:8px 18px;
+  background:var(--gold);
+  color:#1a1006;
+  font-family:'Outfit',sans-serif;
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:0.10em;
+  text-transform:uppercase;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+  transition:opacity 0.16s,transform 0.13s,box-shadow 0.16s;
+  box-shadow:0 4px 16px rgba(196,147,63,0.26);
+  text-decoration:none;
+}
+
+.btn-dl:hover{opacity:0.88;transform:translateY(-1px);box-shadow:0 8px 24px rgba(196,147,63,0.36)}
+.btn-dl:active{transform:translateY(0)}
+
+.content{
+  flex:1;
+  padding:40px 32px 72px;
+  display:flex;
+  justify-content:center;
+}
+
+.inv{
+  width:100%;
+  max-width:680px;
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  border-radius:18px;
+  overflow:hidden;
+  box-shadow:var(--shadow);
+  animation:riseUp 0.65s cubic-bezier(0.16,1,0.3,1) both;
+  transition:background 0.3s ease,border-color 0.3s ease,box-shadow 0.3s ease;
+}
+
+@keyframes riseUp{
+  from{opacity:0;transform:translateY(28px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+.inv-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  padding:36px 44px 32px;
+  background:linear-gradient(170deg,var(--gold-faint) 0%,transparent 55%);
+  border-bottom:1px solid var(--border);
+  position:relative;
+}
+
+.inv-head-top-line{
+  position:absolute;
+  top:0;left:0;right:0;
+  height:1.5px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  opacity:0.6;
+}
+
+.inv-wordmark{
+  font-family:'Cormorant Garamond',serif;
+  font-size:28px;
+  font-weight:400;
+  color:var(--gold);
+  letter-spacing:0.03em;
+  line-height:1;
+  display:block;
+  margin-bottom:4px;
+}
+
+.inv-tagline{
+  font-size:9px;
+  font-weight:500;
+  letter-spacing:0.22em;
+  text-transform:uppercase;
+  color:var(--text-dim);
+}
+
+.inv-head-right{
+  text-align:right;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  gap:6px;
+}
+
+.inv-doc-label{
+  font-family:'Cormorant Garamond',serif;
+  font-size:10.5px;
+  font-weight:300;
+  font-style:italic;
+  letter-spacing:0.45em;
+  color:var(--text-dim);
+  text-transform:uppercase;
+}
+
+.inv-id{
+  font-family:'DM Mono',monospace;
+  font-size:13px;
+  font-weight:500;
+  color:var(--text);
+  letter-spacing:0.04em;
+}
+
+.badge-paid{
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  padding:4px 10px;
+  border-radius:100px;
+  background:rgba(34,197,94,0.09);
+  border:1px solid rgba(34,197,94,0.26);
+  font-size:9px;
+  font-weight:700;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  color:var(--green);
+}
+
+.badge-dot{
+  width:5px;height:5px;
+  border-radius:50%;
+  background:var(--green);
+  animation:blink 2.4s ease-in-out infinite;
+}
+
+@keyframes blink{
+  0%,100%{opacity:1}
+  50%{opacity:0.3}
+}
+
+.inv-body{padding:0 44px}
+
+.parties{
+  display:grid;
+  grid-template-columns:1fr 1px 1fr;
+  padding:30px 0;
+  border-bottom:1px solid var(--divider);
+}
+
+.party-sep{background:var(--divider);margin:4px 30px}
+
+.p-label{
+  font-size:9px;
+  font-weight:600;
+  letter-spacing:0.22em;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:10px;
+}
+
+.p-name{
+  font-family:'Cormorant Garamond',serif;
+  font-size:20px;
+  font-weight:500;
+  color:var(--text);
+  letter-spacing:-0.01em;
+  margin-bottom:6px;
+  line-height:1.2;
+}
+
+.p-detail{
+  font-size:12px;
+  color:var(--text-muted);
+  line-height:1.85;
+}
+
+.dates{
+  display:flex;
+  gap:40px;
+  padding:20px 0;
+  border-bottom:1px solid var(--divider);
+}
+
+.d-label{
+  font-size:9px;
+  font-weight:600;
+  letter-spacing:0.20em;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:4px;
+}
+
+.d-val{
+  font-family:'DM Mono',monospace;
+  font-size:13px;
+  color:var(--text);
+}
+
+.tbl-wrap{padding:22px 0 0}
+
+.tbl-head{
+  display:grid;
+  grid-template-columns:1fr 46px 110px 118px;
+  gap:14px;
+  padding-bottom:9px;
+  border-bottom:1px solid var(--gold-dim);
+}
+
+.th{
+  font-size:9px;
+  font-weight:600;
+  letter-spacing:0.18em;
+  text-transform:uppercase;
+  color:var(--gold);
+}
+
+.th.r{text-align:right}
+
+.tbl-row{
+  display:grid;
+  grid-template-columns:1fr 46px 110px 118px;
+  gap:14px;
+  padding:14px 0;
+  border-bottom:1px solid var(--divider);
+  align-items:start;
+  transition:background 0.13s;
+  border-radius:6px;
+}
+
+.tbl-row:hover{background:var(--bg-row)}
+
+.td-name{
+  font-size:13px;
+  font-weight:500;
+  color:var(--text);
+  margin-bottom:2px;
+}
+
+.td-sub{
+  font-size:11px;
+  color:var(--text-dim);
+  line-height:1.55;
+}
+
+.td-num{
+  font-family:'DM Mono',monospace;
+  font-size:13px;
+  color:var(--text-muted);
+  text-align:right;
+  padding-top:1px;
+}
+
+.totals{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  gap:7px;
+  padding:20px 0 22px;
+  border-bottom:1px solid var(--divider);
+}
+
+.tot-row{
+  display:flex;
+  align-items:baseline;
+  gap:36px;
+  min-width:276px;
+}
+
+.tot-lbl{font-size:12px;color:var(--text-muted);flex:1}
+
+.tot-val{
+  font-family:'DM Mono',monospace;
+  font-size:13px;
+  color:var(--text-muted);
+  min-width:118px;
+  text-align:right;
+}
+
+.tot-grand{
+  display:flex;
+  align-items:center;
+  gap:36px;
+  min-width:276px;
+  margin-top:5px;
+  padding:13px 15px;
+  background:var(--gold-faint);
+  border:1px solid var(--border);
+  border-radius:10px;
+}
+
+.tot-grand-lbl{
+  font-family:'Cormorant Garamond',serif;
+  font-size:15px;
+  font-weight:600;
+  color:var(--text);
+  flex:1;
+  letter-spacing:0.02em;
+}
+
+.tot-grand-val{
+  font-family:'DM Mono',monospace;
+  font-size:18px;
+  font-weight:500;
+  color:var(--gold-b);
+  min-width:118px;
+  text-align:right;
+  letter-spacing:-0.02em;
+}
+
+.payment{
+  padding:22px 0;
+  border-bottom:1px solid var(--divider);
+}
+
+.pmt-title{
+  font-size:9px;
+  font-weight:600;
+  letter-spacing:0.22em;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:14px;
+}
+
+.pmt-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px 20px;
+}
+
+.pmt-item-lbl{
+  font-size:9px;
+  font-weight:500;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  color:var(--text-dim);
+  margin-bottom:2px;
+}
+
+.pmt-item-val{
+  font-family:'DM Mono',monospace;
+  font-size:12px;
+  color:var(--text-muted);
+}
+
+.note-section{
+  padding:20px 0;
+  border-bottom:1px solid var(--divider);
+}
+
+.note-title{
+  font-size:9px;
+  font-weight:600;
+  letter-spacing:0.22em;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:9px;
+}
+
+.note-body{
+  font-size:11px;
+  color:var(--text-muted);
+  line-height:1.78;
+  max-width:490px;
+}
+
+.inv-foot{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:18px 44px;
+  background:rgba(196,147,63,0.025);
+}
+
+.foot-brand{
+  font-family:'Cormorant Garamond',serif;
+  font-size:13px;
+  color:var(--gold);
+  letter-spacing:0.06em;
+}
+
+.foot-ts{
+  font-family:'DM Mono',monospace;
+  font-size:9px;
+  color:var(--text-dim);
+  letter-spacing:0.05em;
+}
+
+@media(max-width:800px){
+  .sidebar{display:none}
+  .topbar{padding:11px 16px}
+  .content{padding:24px 12px 56px}
+  .inv-head{padding:28px 24px 24px}
+  .inv-body{padding:0 24px}
+  .inv-foot{padding:16px 24px}
+  .dates{gap:20px;flex-wrap:wrap}
+  .pmt-grid{grid-template-columns:1fr 1fr}
+  .tbl-head,.tbl-row{grid-template-columns:1fr 36px 88px 88px;gap:10px}
+}
+
+@media print{
+  @page{size:A4;margin:14mm 16mm}
+
+  .sidebar,.topbar{display:none!important}
+  .shell{display:block}
+  .content{padding:0;display:block}
+  .main{display:block}
+
+  body{
+    background:#fff;
+    background-image:none;
+    color:#1a1208;
+    -webkit-print-color-adjust:exact;
+    print-color-adjust:exact;
+  }
+
+  .inv{
+    background:#fff;
+    border:none;
+    border-radius:0;
+    box-shadow:none;
+    animation:none;
+    max-width:100%;
+  }
+
+  .inv-head{
+    background:#1a1208!important;
+    border-bottom:2px solid #c4933f;
+    padding:24px 28px 20px;
+  }
+
+  .inv-head-top-line{display:none}
+  .inv-wordmark{color:#c4933f!important;font-size:22px}
+  .inv-tagline{color:rgba(245,240,232,0.45)!important}
+  .inv-doc-label{color:rgba(245,240,232,0.40)!important}
+  .inv-id{color:#f5f0e8!important}
+
+  .inv-body{padding:0 28px}
+
+  .p-label,.d-label,.th,.pmt-title,.note-title{color:#b07d28!important}
+  .p-name{color:#1a1208!important;font-size:17px}
+  .p-detail,.note-body{color:#6b5c3e!important}
+  .d-val{color:#1a1208!important}
+  .tbl-head{border-bottom-color:#c4933f!important}
+  .tbl-row{border-bottom-color:#f0ebe3!important}
+  .tbl-row:hover{background:none}
+  .td-name{color:#1a1208!important}
+  .td-sub{color:#9b8060!important}
+  .td-num,.pmt-item-val{color:#1a1208!important}
+  .pmt-item-lbl{color:#9b8060!important}
+  .tot-lbl{color:#6b5c3e!important}
+  .tot-val{color:#1a1208!important}
+  .tot-grand{background:#fdf8f0!important;border-color:#c4933f!important}
+  .tot-grand-lbl{color:#1a1208!important}
+  .tot-grand-val{color:#b07d28!important}
+
+  .inv-foot{background:#faf7f2!important;padding:14px 28px}
+  .foot-brand{color:#b07d28!important}
+  .foot-ts{color:#9b8060!important}
+
+  *{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+
+<div class="shell">
+
+  <aside class="sidebar">
+    <div class="sb-head">
+      <span class="sb-wordmark">yeccafold</span>
+      <span class="sb-subtitle">Platform Kreator</span>
+    </div>
+
+    <div class="sb-user">
+      <div class="sb-user-row">
+        <div class="sb-avatar">NH</div>
+        <div>
+          <div class="sb-user-name">
+            Nabila Hanum
+            <span class="sb-online"></span>
+          </div>
+          <div class="sb-user-role">BD Manager</div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="sb-nav">
+      <div class="sb-group-label" style="margin-top:4px">Overview</div>
+      <a href="#" class="sb-item">
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
+          <rect x="1" y="1" width="5.5" height="5.5" rx="1.2" stroke="currentColor" stroke-width="1.2"/>
+          <rect x="8.5" y="1" width="5.5" height="5.5" rx="1.2" stroke="currentColor" stroke-width="1.2"/>
+          <rect x="1" y="8.5" width="5.5" height="5.5" rx="1.2" stroke="currentColor" stroke-width="1.2"/>
+          <rect x="8.5" y="8.5" width="5.5" height="5.5" rx="1.2" stroke="currentColor" stroke-width="1.2"/>
+        </svg>
+        Dashboard
+      </a>
+
+      <div class="sb-group-label" style="margin-top:12px">Creator Center</div>
+      <a href="#" class="sb-item">
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
+          <circle cx="7.5" cy="5" r="2.8" stroke="currentColor" stroke-width="1.2"/>
+          <path d="M1.5 14c0-3.314 2.686-5 6-5s6 1.686 6 5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        </svg>
+        Kreator
+      </a>
+      <a href="#" class="sb-item active">
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
+          <path d="M8.5 1H3.5A1.5 1.5 0 002 2.5v10A1.5 1.5 0 003.5 14h8A1.5 1.5 0 0013 12.5V6L8.5 1z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
+          <path d="M8.5 1v5H13" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
+          <path d="M4.5 8.5h6M4.5 11h3.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        </svg>
+        Invoice
+      </a>
+      <a href="#" class="sb-item">
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
+          <path d="M9 1H3.5A1.5 1.5 0 002 2.5v10A1.5 1.5 0 003.5 14h8A1.5 1.5 0 0013 12.5V5L9 1z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
+          <path d="M9 1v4h4" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
+          <path d="M4.5 7.5h6M4.5 10h4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        </svg>
+        MOU
+      </a>
+      <a href="#" class="sb-item">
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
+          <path d="M6 9a3.5 3.5 0 005 0l1.5-1.5A3.536 3.536 0 007 2L6 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+          <path d="M9 6a3.5 3.5 0 00-5 0L2.5 7.5A3.536 3.536 0 008 13l1-1" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        </svg>
+        Sesi
+      </a>
+
+      <div class="sb-group-label" style="margin-top:12px">Sistem</div>
+      <a href="#" class="sb-item">
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
+          <circle cx="7.5" cy="7.5" r="2" stroke="currentColor" stroke-width="1.2"/>
+          <path d="M7.5 1v1.5M7.5 12.5V14M1 7.5h1.5M12.5 7.5H14M3.4 3.4l1.06 1.06M10.54 10.54l1.06 1.06M3.4 11.6l1.06-1.06M10.54 4.46l1.06-1.06" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        </svg>
+        Pengaturan
+      </a>
+    </nav>
+
+    <div class="sb-foot">
+      <div class="sb-inv-card">
+        <div class="sb-inv-card-label">Invoice Aktif</div>
+        <div class="sb-inv-card-id" id="sb-inv-id">INV-20260524-0042</div>
+        <div class="sb-inv-card-row">
+          <div class="sb-inv-card-total" id="sb-inv-total">Rp 12,25 jt</div>
+          <div class="sb-badge-lunas">
+            <span style="width:5px;height:5px;border-radius:50%;background:#22c55e;display:inline-block"></span>
+            Lunas
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <div class="main">
+
+    <header class="topbar">
+      <div class="tb-crumb" id="dyn-crumb">Invoice / INV-20260524-0042</div>
+      <div class="tb-right">
+        <button class="btn-theme" id="theme-btn" title="Ganti tema" aria-label="Ganti tema terang gelap">
+          <svg id="icon-moon" width="15" height="15" viewBox="0 0 15 15" fill="none">
+            <path d="M13 9.5A6 6 0 016.5 2a6 6 0 100 11A6.001 6.001 0 0013 9.5z" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <svg id="icon-sun" width="15" height="15" viewBox="0 0 15 15" fill="none" style="display:none">
+            <circle cx="7.5" cy="7.5" r="2.5" stroke="currentColor" stroke-width="1.3"/>
+            <path d="M7.5 1v1.5M7.5 12.5V14M1 7.5h1.5M12.5 7.5H14M3.05 3.05l1.06 1.06M10.89 10.89l1.06 1.06M3.05 11.95l1.06-1.06M10.89 4.11l1.06-1.06" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <button class="btn-dl" onclick="window.print()">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+            <path d="M6 1v6M3.5 4.5L6 7l2.5-2.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M1.5 9v1a.5.5 0 00.5.5h8a.5.5 0 00.5-.5V9" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+          </svg>
+          Unduh PDF
+        </button>
+      </div>
+    </header>
+
+    <main class="content">
+      <div class="inv">
+
+        <div class="inv-head">
+          <div class="inv-head-top-line"></div>
+          <div>
+            <span class="inv-wordmark">yeccafold</span>
+            <div class="inv-tagline">Platform Manajemen Kreator</div>
+          </div>
+          <div class="inv-head-right">
+            <div class="inv-doc-label">Invoice</div>
+            <div class="inv-id" id="dyn-inv-id">INV-20260524-0042</div>
+            <div class="badge-paid">
+              <span class="badge-dot"></span>
+              Lunas
+            </div>
+          </div>
+        </div>
+
+        <div class="inv-body">
+
+          <div class="parties">
+            <div>
+              <div class="p-label">Dari</div>
+              <div class="p-name">PT. Yeccafold Indonesia</div>
+              <div class="p-detail">
+                Jl. HR Rasuna Said Kav. 7<br>
+                Jakarta Selatan 12940<br>
+                invoice@yeccafold.id
+              </div>
+            </div>
+            <div class="party-sep"></div>
+            <div>
+              <div class="p-label">Kepada</div>
+              <div class="p-name">JessicaRavena</div>
+              <div class="p-detail">
+                @jessica.ravena<br>
+                Platform: TikTok<br>
+                Mega Creator
+              </div>
+            </div>
+          </div>
+
+          <div class="dates">
+            <div>
+              <div class="d-label">Tanggal Invoice</div>
+              <div class="d-val" id="dyn-inv-date">24 Mei 2026</div>
+            </div>
+            <div>
+              <div class="d-label">Jatuh Tempo</div>
+              <div class="d-val" id="dyn-due-date">27 Mei 2026</div>
+            </div>
+            <div>
+              <div class="d-label">Dibuat Dalam</div>
+              <div class="d-val" id="dyn-timer">0,0 dtk</div>
+            </div>
+          </div>
+
+          <div class="tbl-wrap">
+            <div class="tbl-head">
+              <div class="th">Deskripsi</div>
+              <div class="th r">Qty</div>
+              <div class="th r">Rate</div>
+              <div class="th r">Jumlah</div>
+            </div>
+            <div>
+              <div class="tbl-row">
+                <div>
+                  <div class="td-name">Konten TikTok, Kampanye Brand X</div>
+                  <div class="td-sub" id="dyn-sub-1">Video 60 detik dan 3 story. Periode Mei 2026.</div>
+                </div>
+                <div class="td-num">1</div>
+                <div class="td-num" id="rate-0"></div>
+                <div class="td-num" id="amount-0"></div>
+              </div>
+              <div class="tbl-row">
+                <div>
+                  <div class="td-name">Konten Instagram Reels</div>
+                  <div class="td-sub" id="dyn-sub-2">2 reels dan 1 feed post. Periode Mei 2026.</div>
+                </div>
+                <div class="td-num">1</div>
+                <div class="td-num" id="rate-1"></div>
+                <div class="td-num" id="amount-1"></div>
+              </div>
+              <div class="tbl-row">
+                <div>
+                  <div class="td-name">Biaya Platform yeccafold</div>
+                  <div class="td-sub">Pembuatan dokumen otomatis. Invoice dan MOU.</div>
+                </div>
+                <div class="td-num">1</div>
+                <div class="td-num" id="rate-2"></div>
+                <div class="td-num" id="amount-2"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="totals">
+            <div class="tot-row">
+              <span class="tot-lbl">Subtotal</span>
+              <span class="tot-val" id="dyn-subtotal"></span>
+            </div>
+            <div class="tot-row">
+              <span class="tot-lbl">PPh 23 (2%)</span>
+              <span class="tot-val" id="dyn-tax"></span>
+            </div>
+            <div class="tot-grand">
+              <span class="tot-grand-lbl">Total Tagihan</span>
+              <span class="tot-grand-val" id="dyn-grand"></span>
+            </div>
+          </div>
+
+          <div class="payment">
+            <div class="pmt-title">Detail Pembayaran</div>
+            <div class="pmt-grid">
+              <div>
+                <div class="pmt-item-lbl">Nama Bank</div>
+                <div class="pmt-item-val">Bank Central Asia</div>
+              </div>
+              <div>
+                <div class="pmt-item-lbl">Nama Penerima</div>
+                <div class="pmt-item-val">Jessica Ravena</div>
+              </div>
+              <div>
+                <div class="pmt-item-lbl">Nomor Rekening</div>
+                <div class="pmt-item-val">1234 5678 90</div>
+              </div>
+              <div>
+                <div class="pmt-item-lbl">Kode SWIFT</div>
+                <div class="pmt-item-val">CENAIDJA</div>
+              </div>
+              <div>
+                <div class="pmt-item-lbl">KCP / Kota</div>
+                <div class="pmt-item-val">Jakarta Selatan</div>
+              </div>
+              <div>
+                <div class="pmt-item-lbl">Referensi</div>
+                <div class="pmt-item-val" id="dyn-pmt-ref">INV-20260524-0042</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="note-section">
+            <div class="note-title">Catatan</div>
+            <div class="note-body" id="dyn-note">Invoice ini dibuat secara otomatis oleh yeccafold. Pembayaran dapat dilakukan melalui transfer bank ke rekening di atas. Harap cantumkan nomor invoice sebagai referensi transfer.</div>
+          </div>
+
+        </div>
+
+        <div class="inv-foot">
+          <div class="foot-brand">yeccafold</div>
+          <div class="foot-ts" id="dyn-created-at">Dibuat otomatis pada 24 Mei 2026 pukul 14.32 WIB</div>
+        </div>
+
+      </div>
+    </main>
+
+  </div>
+</div>
+
+<script>
+(function () {
+  var months = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+  var now = new Date();
+
+  function fmt(d) { return d.getDate() + ' ' + months[d.getMonth()] + ' ' + d.getFullYear(); }
+  function pad(n) { return String(n).padStart(2, '0'); }
+  function rupiah(n) { return 'Rp ' + n.toLocaleString('id-ID'); }
+  function set(id, v) { var e = document.getElementById(id); if (e) e.textContent = v; }
+
+  var y = now.getFullYear();
+  var mo = pad(now.getMonth() + 1);
+  var dd = pad(now.getDate());
+  var invId = 'INV-' + y + mo + dd + '-0042';
+
+  var due = new Date(now);
+  due.setDate(due.getDate() + 3);
+
+  var period = months[now.getMonth()] + ' ' + now.getFullYear();
+  var timeStr = pad(now.getHours()) + '.' + pad(now.getMinutes());
+
+  document.title = 'Invoice ' + invId + ' | yeccafold';
+  set('dyn-crumb', 'Invoice / ' + invId);
+  set('dyn-inv-id', invId);
+  set('dyn-inv-date', fmt(now));
+  set('dyn-due-date', fmt(due));
+  set('dyn-sub-1', 'Video 60 detik dan 3 story. Periode ' + period + '.');
+  set('dyn-sub-2', '2 reels dan 1 feed post. Periode ' + period + '.');
+  set('dyn-pmt-ref', invId);
+  set('dyn-created-at', 'Dibuat otomatis pada ' + fmt(now) + ' pukul ' + timeStr + ' WIB');
+  set('sb-inv-id', invId);
+
+  var RATES = [10000000, 2500000, 0];
+  var subtotal = RATES.reduce(function (s, r) { return s + r; }, 0);
+  var tax = Math.round(subtotal * 0.02);
+  var grand = subtotal - tax;
+
+  for (var i = 0; i < RATES.length; i++) {
+    set('rate-' + i, RATES[i] === 0 ? '0' : RATES[i].toLocaleString('id-ID'));
+    set('amount-' + i, (RATES[i]).toLocaleString('id-ID'));
+  }
+
+  set('dyn-subtotal', rupiah(subtotal));
+  set('dyn-tax', rupiah(tax));
+  set('dyn-grand', rupiah(grand));
+
+  var grandJt = grand / 1000000;
+  set('sb-inv-total', 'Rp ' + grandJt.toFixed(2).replace('.', ',') + ' jt');
+
+  var TARGET = 4.2;
+  var ANIM_MS = 1700;
+  var t0 = performance.now();
+
+  function tickTimer(now) {
+    var progress = Math.min((now - t0) / ANIM_MS, 1);
+    var eased = 1 - Math.pow(1 - progress, 3);
+    var val = (eased * TARGET).toFixed(1).replace('.', ',');
+    set('dyn-timer', val + ' dtk');
+    set('dyn-note', 'Invoice ini dibuat secara otomatis oleh yeccafold dalam ' + val + ' detik. Pembayaran dapat dilakukan melalui transfer bank ke rekening di atas. Harap cantumkan nomor invoice sebagai referensi transfer.');
+    if (progress < 1) requestAnimationFrame(tickTimer);
+  }
+  requestAnimationFrame(tickTimer);
+
+  var light = false;
+  var btn = document.getElementById('theme-btn');
+  var moon = document.getElementById('icon-moon');
+  var sun = document.getElementById('icon-sun');
+  if (btn) {
+    btn.addEventListener('click', function () {
+      light = !light;
+      document.documentElement.classList.toggle('light', light);
+      moon.style.display = light ? 'none' : 'block';
+      sun.style.display = light ? 'block' : 'none';
+    });
+  }
+}());
+</script>
+</body>
+</html>
