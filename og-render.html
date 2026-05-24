@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Ephesis&family=Libre+Caslon+Display&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1200px; height: 630px; overflow: hidden; }
+      body {
+        position: relative;
+        background: #faf7f2;
+        color: #1a1208;
+        font-family: 'Inter', sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+      .glow-a {
+        position: absolute; width: 720px; height: 560px;
+        right: -160px; top: -200px; border-radius: 50%;
+        background: radial-gradient(ellipse, rgba(196,147,63,0.26) 0%, transparent 68%);
+        filter: blur(60px);
+      }
+      .glow-b {
+        position: absolute; width: 560px; height: 460px;
+        left: -180px; bottom: -220px; border-radius: 50%;
+        background: radial-gradient(ellipse, rgba(201,151,45,0.20) 0%, transparent 70%);
+        filter: blur(64px);
+      }
+      .grid {
+        position: absolute; inset: 0;
+        background-image: radial-gradient(rgba(26,18,8,0.07) 1px, transparent 1px);
+        background-size: 30px 30px;
+        -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 42%, black 6%, transparent 76%);
+        mask-image: radial-gradient(ellipse 80% 70% at 50% 42%, black 6%, transparent 76%);
+      }
+      .frame {
+        position: relative; z-index: 2;
+        width: 100%; height: 100%;
+        padding: 60px 72px;
+        display: flex; flex-direction: column; justify-content: space-between;
+      }
+      .top { display: flex; align-items: center; justify-content: space-between; }
+      .brand {
+        font-family: 'Libre Caslon Display', serif;
+        font-size: 30px; letter-spacing: -0.02em; color: #1a1208;
+      }
+      .pill {
+        display: inline-flex; align-items: center; gap: 9px;
+        padding: 8px 16px; border-radius: 100px;
+        border: 1px solid rgba(176,125,40,0.35);
+        background: rgba(196,147,63,0.10);
+        font-size: 13px; font-weight: 600; letter-spacing: 0.14em;
+        color: #9a6c1f; text-transform: uppercase;
+      }
+      .dot { width: 8px; height: 8px; border-radius: 50%; background: #22a558; box-shadow: 0 0 0 4px rgba(34,165,88,0.16); }
+      .core { display: flex; flex-direction: column; }
+      h1 {
+        font-family: 'Libre Caslon Display', serif;
+        font-weight: 400; font-size: 66px; line-height: 1.04;
+        letter-spacing: -0.025em; color: #1a1208;
+      }
+      h1 .wa { color: #d6492f; }
+      .script {
+        font-family: 'Ephesis', cursive; font-weight: 400;
+        font-size: 104px; color: #b07d28; line-height: 1.02;
+        margin-top: 4px;
+      }
+      .sub {
+        margin-top: 22px; max-width: 720px;
+        font-size: 22px; line-height: 1.55; font-weight: 400;
+        color: rgba(26,18,8,0.58);
+      }
+      .pipe { display: flex; gap: 7px; margin-top: 28px; max-width: 520px; }
+      .seg { flex: 1; height: 5px; border-radius: 4px; background: rgba(26,18,8,0.10); }
+      .seg.on { background: #b07d28; }
+      .metrics { display: flex; gap: 52px; align-items: flex-end; }
+      .metric .num {
+        font-family: 'Libre Caslon Display', serif;
+        font-size: 46px; color: #b07d28; letter-spacing: -0.02em; line-height: 1;
+      }
+      .metric .lab {
+        margin-top: 6px; font-size: 15px; font-weight: 500;
+        color: rgba(26,18,8,0.50);
+      }
+      .div { width: 1px; height: 54px; background: rgba(26,18,8,0.10); }
+    </style>
+  </head>
+  <body>
+    <div class="glow-a"></div>
+    <div class="glow-b"></div>
+    <div class="grid"></div>
+
+    <div class="frame">
+      <div class="top">
+        <div class="brand">yeccafold</div>
+        <div class="pill"><span class="dot"></span>Platform Manajemen KOL</div>
+      </div>
+
+      <div class="core">
+        <h1>Satu platform. Semua kreator.<br />Nol kekacauan <span class="wa">WhatsApp.</span></h1>
+        <div class="script">Jadi Efisien!</div>
+        <p class="sub">Dari reachout hingga pembayaran dalam satu alur kerja yang terukur. Tim KOL bekerja 90 persen lebih cepat.</p>
+        <div class="pipe">
+          <div class="seg on"></div><div class="seg on"></div><div class="seg on"></div>
+          <div class="seg on"></div><div class="seg on"></div><div class="seg"></div>
+        </div>
+      </div>
+
+      <div class="metrics">
+        <div class="metric"><div class="num">90%</div><div class="lab">lebih cepat</div></div>
+        <div class="div"></div>
+        <div class="metric"><div class="num">30 dtk</div><div class="lab">per dokumen</div></div>
+        <div class="div"></div>
+        <div class="metric"><div class="num">6 tahap</div><div class="lab">pipeline terpantau</div></div>
+        <div class="div"></div>
+        <div class="metric"><div class="num">500+</div><div class="lab">kreator dikelola</div></div>
+      </div>
+    </div>
+  </body>
+</html>

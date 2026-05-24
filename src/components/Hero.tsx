@@ -132,8 +132,6 @@ function LiveToast() {
             border: '1px solid var(--c-border)',
             borderRadius: '12px',
             padding: '10px 14px',
-            backdropFilter: 'blur(20px)',
-            WebkitBackdropFilter: 'blur(20px)',
           } as CSSProperties}
         >
           <div className="flex items-center gap-3">
@@ -164,7 +162,7 @@ function HeroBackground() {
           width: '80%', height: '65%',
           left: '-12%', top: '-18%',
           background: 'radial-gradient(ellipse, rgba(196,147,63,0.17) 0%, transparent 68%)',
-          filter: 'blur(90px)',
+          filter: 'blur(64px)',
           animation: 'blob-drift-1 14s ease-in-out infinite',
         }}
       />
@@ -174,7 +172,7 @@ function HeroBackground() {
           width: '60%', height: '55%',
           right: '-10%', top: '2%',
           background: 'radial-gradient(ellipse, rgba(170,95,20,0.13) 0%, transparent 68%)',
-          filter: 'blur(110px)',
+          filter: 'blur(72px)',
           animation: 'blob-drift-2 18s ease-in-out infinite',
         }}
       />
@@ -184,7 +182,7 @@ function HeroBackground() {
           width: '55%', height: '45%',
           left: '22%', bottom: '-8%',
           background: 'radial-gradient(ellipse, rgba(196,147,63,0.10) 0%, transparent 70%)',
-          filter: 'blur(120px)',
+          filter: 'blur(72px)',
           animation: 'blob-drift-3 20s ease-in-out infinite',
         }}
       />
@@ -194,7 +192,7 @@ function HeroBackground() {
           width: '42%', height: '40%',
           right: '18%', top: '38%',
           background: 'radial-gradient(ellipse, rgba(210,130,30,0.09) 0%, transparent 70%)',
-          filter: 'blur(100px)',
+          filter: 'blur(64px)',
           animation: 'blob-drift-4 16s ease-in-out infinite',
         }}
       />
@@ -204,7 +202,7 @@ function HeroBackground() {
 
 type Creator = typeof CREATORS[0]
 
-function PipelineStrip({ stageIndex, fillPct }: { stageIndex: number; fillPct: number }) {
+function PipelineStrip({ stageIndex }: { stageIndex: number }) {
   return (
     <div className="flex flex-col gap-2">
       <div className="flex items-center justify-between mb-0.5">
@@ -222,9 +220,9 @@ function PipelineStrip({ stageIndex, fillPct }: { stageIndex: number; fillPct: n
               <div className="absolute inset-0 rounded-full" style={{ background: 'var(--c-accent)', opacity: 0.55 }} />
             )}
             {i === stageIndex && (
-              <motion.div
-                className="absolute inset-y-0 left-0 rounded-full"
-                style={{ background: 'var(--c-accent)', width: `${fillPct}%` }}
+              <div
+                className="pipeline-fill-bar absolute inset-0 rounded-full"
+                style={{ background: 'var(--c-accent)' }}
               />
             )}
           </div>
@@ -242,7 +240,7 @@ function PipelineStrip({ stageIndex, fillPct }: { stageIndex: number; fillPct: n
   )
 }
 
-function CreatorCard({ creator, fillPct, elapsed }: { creator: Creator; fillPct: number; elapsed: number }) {
+function CreatorCard({ creator, elapsed }: { creator: Creator; elapsed: number }) {
   const mins = Math.floor(elapsed / 60)
   const secs = elapsed % 60
   const timeStr = mins > 0 ? `${mins}m ${secs}dtk lalu` : `${secs}dtk lalu`
@@ -258,8 +256,6 @@ function CreatorCard({ creator, fillPct, elapsed }: { creator: Creator; fillPct:
         background: 'var(--c-bg-card)',
         border: '1px solid var(--c-border)',
         boxShadow: 'var(--c-card-shadow)',
-        backdropFilter: 'blur(32px)',
-        WebkitBackdropFilter: 'blur(32px)',
       }}
     >
       <div className="px-6 pt-6 pb-5">
@@ -309,7 +305,7 @@ function CreatorCard({ creator, fillPct, elapsed }: { creator: Creator; fillPct:
 
       <div className="px-6 pb-5" style={{ borderTop: '1px solid var(--c-border-subtle)' }}>
         <div className="pt-4">
-          <PipelineStrip stageIndex={creator.stage} fillPct={fillPct} />
+          <PipelineStrip stageIndex={creator.stage} />
         </div>
       </div>
 
@@ -359,7 +355,6 @@ function CreatorCarousel() {
     shuffled(CREATORS).map(c => ({ ...c, stackRot: (Math.random() - 0.5) * 28 }))
   )
   const [index, setIndex] = useState(0)
-  const [fillPct, setFillPct] = useState(0)
   const [elapsed, setElapsed] = useState(() => Math.floor(Math.random() * 120) + 20)
   const containerRef = useRef<HTMLDivElement>(null)
 
@@ -383,25 +378,12 @@ function CreatorCarousel() {
 
   const advance = useCallback(() => {
     setIndex(i => (i + 1) % order.length)
-    setFillPct(0)
     setElapsed(Math.floor(Math.random() * 120) + 20)
   }, [order.length])
 
   useEffect(() => {
-    let start: number | null = null
-    let frameId: number
-    const tick = (ts: number) => {
-      if (start === null) start = ts
-      const pct = Math.min(((ts - start) / CYCLE_DURATION) * 100, 100)
-      setFillPct(pct)
-      if (pct < 100) {
-        frameId = requestAnimationFrame(tick)
-      } else {
-        advance()
-      }
-    }
-    frameId = requestAnimationFrame(tick)
-    return () => cancelAnimationFrame(frameId)
+    const id = setTimeout(advance, CYCLE_DURATION)
+    return () => clearTimeout(id)
   }, [index, advance])
 
   useEffect(() => {
@@ -474,7 +456,7 @@ function CreatorCarousel() {
             animate="center"
             exit="exit"
           >
-            <CreatorCard creator={creator} fillPct={fillPct} elapsed={elapsed} />
+            <CreatorCard creator={creator} elapsed={elapsed} />
           </motion.div>
         </AnimatePresence>
       </motion.div>

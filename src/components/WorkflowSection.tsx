@@ -40,13 +40,13 @@ function StageButton({
   s,
   i,
   isActive,
-  fillPct,
+  paused,
   onSelect,
 }: {
   s: (typeof STAGES)[0]
   i: number
   isActive: boolean
-  fillPct: number
+  paused: boolean
   onSelect: (i: number) => void
 }) {
   const btnRef = useRef<HTMLButtonElement>(null)
@@ -70,7 +70,6 @@ function StageButton({
     2 * (dims.w - 2 * CORNER_R) +
     2 * (dims.h - 2 * CORNER_R) +
     2 * Math.PI * CORNER_R
-  const dashOffset = perimeter * (1 - fillPct / 100)
 
   return (
     <button
@@ -108,6 +107,8 @@ function StageButton({
             fill="none"
           />
           <rect
+            key={`${paused}-${Math.round(dims.w)}`}
+            className="ring-fill-bar"
             x={1}
             y={1}
             width={dims.w - 2}
@@ -118,9 +119,10 @@ function StageButton({
             fill="none"
             style={{
               strokeDasharray: perimeter,
-              strokeDashoffset: dashOffset,
-              transition: 'stroke-dashoffset 0.05s linear',
-            }}
+              ['--ring-perimeter']: String(perimeter),
+              animation: `ring-fill ${AUTO_MS}ms linear forwards`,
+              animationPlayState: paused ? 'paused' : 'running',
+            } as CSSProperties}
           />
         </svg>
       )}
@@ -353,36 +355,21 @@ function DashboardMockup({ active }: { active: number }) {
 export default function WorkflowSection() {
   const [active, setActive] = useState(0)
   const [paused, setPaused] = useState(false)
-  const [fillPct, setFillPct] = useState(0)
   const sectionRef = useRef<HTMLDivElement>(null)
   const isInView = useInView(sectionRef, { once: false, amount: 0.15 })
 
   const advance = useCallback(() => {
     setActive(a => (a + 1) % STAGES.length)
-    setFillPct(0)
   }, [])
 
   useEffect(() => {
     if (!isInView || paused) return
-    let start: number | null = null
-    let frameId: number
-    const tick = (ts: number) => {
-      if (start === null) start = ts
-      const pct = Math.min(((ts - start) / AUTO_MS) * 100, 100)
-      setFillPct(pct)
-      if (pct < 100) {
-        frameId = requestAnimationFrame(tick)
-      } else {
-        advance()
-      }
-    }
-    frameId = requestAnimationFrame(tick)
-    return () => cancelAnimationFrame(frameId)
+    const id = setTimeout(advance, AUTO_MS)
+    return () => clearTimeout(id)
   }, [active, isInView, paused, advance])
 
   const handleClick = (i: number) => {
     setActive(i)
-    setFillPct(0)
     setPaused(true)
     setTimeout(() => setPaused(false), 10000)
   }
@@ -450,14 +437,14 @@ export default function WorkflowSection() {
                 s={s}
                 i={i}
                 isActive={i === active}
-                fillPct={i === active ? fillPct : 0}
+                paused={paused}
                 onSelect={handleClick}
               />
             ))}
           </motion.div>
 
           <motion.div
-            className="flex-1 min-w-0"
+            className="w-full lg:flex-1 min-w-0"
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
