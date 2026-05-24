@@ -6,7 +6,7 @@
   --c-bg: #080604;
   --c-bg-card: rgba(18,14,8,0.90);
   --c-text: #f5f0e8;
-  --c-text-muted: rgba(245,240,232,0.42);
+  --c-text-muted: rgba(245,240,232,0.56);
   --c-text-dim: rgba(245,240,232,0.20);
   --c-border: rgba(255,255,255,0.09);
   --c-border-subtle: rgba(255,255,255,0.055);
@@ -46,7 +46,7 @@
   --c-bg: #faf7f2;
   --c-bg-card: #ffffff;
   --c-text: #1a1208;
-  --c-text-muted: rgba(26,18,8,0.42);
+  --c-text-muted: rgba(26,18,8,0.60);
   --c-text-dim: rgba(26,18,8,0.20);
   --c-border: rgba(0,0,0,0.07);
   --c-border-subtle: rgba(0,0,0,0.05);

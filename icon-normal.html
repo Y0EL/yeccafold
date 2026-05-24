@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&display=swap" rel="stylesheet" />
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 100vw; height: 100vh; overflow: hidden; }
+      body {
+        background: #080604;
+        display: flex; align-items: center; justify-content: center;
+        position: relative;
+      }
+      .glow {
+        position: absolute; width: 90vmin; height: 90vmin; border-radius: 50%;
+        background: radial-gradient(circle, rgba(196,147,63,0.28) 0%, transparent 62%);
+        filter: blur(4vmin);
+      }
+      .mark {
+        position: relative; z-index: 2;
+        font-family: 'Libre Caslon Display', Georgia, serif;
+        color: #c4933f; font-size: 64vmin; line-height: 1;
+        margin-top: -4vmin;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="glow"></div>
+    <div class="mark">y</div>
+  </body>
+</html>
