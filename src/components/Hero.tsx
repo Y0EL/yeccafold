@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect, useCallback } from 'react'
 import type { CSSProperties } from 'react'
-import { motion, useScroll, useTransform, AnimatePresence, useMotionValue, useSpring } from 'framer-motion'
+import { m, useScroll, useTransform, AnimatePresence, useMotionValue, useSpring } from 'framer-motion'
 import type { Variants } from 'framer-motion'
 import { ArrowRight, Play, ChevronDown, CheckCircle, Users, Tag } from 'lucide-react'
 
@@ -121,7 +121,7 @@ function LiveToast() {
   return (
     <AnimatePresence mode="wait">
       {show && (
-        <motion.div
+        <m.div
           key={idx}
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
@@ -146,7 +146,7 @@ function LiveToast() {
               {ev.time}
             </span>
           </div>
-        </motion.div>
+        </m.div>
       )}
     </AnimatePresence>
   )
@@ -447,9 +447,9 @@ function CreatorCarousel() {
         }}
       />
 
-      <motion.div style={{ rotateX, rotateY, rotateZ, transformStyle: 'preserve-3d', position: 'relative', zIndex: 2 }}>
+      <m.div style={{ rotateX, rotateY, rotateZ, transformStyle: 'preserve-3d', position: 'relative', zIndex: 2 }}>
         <AnimatePresence mode="wait">
-          <motion.div
+          <m.div
             key={creator.seed}
             variants={cardVariants}
             initial="enter"
@@ -457,9 +457,9 @@ function CreatorCarousel() {
             exit="exit"
           >
             <CreatorCard creator={creator} elapsed={elapsed} />
-          </motion.div>
+          </m.div>
         </AnimatePresence>
-      </motion.div>
+      </m.div>
     </div>
   )
 }
@@ -511,11 +511,11 @@ export default function Hero() {
       <div className="relative z-10 max-w-5xl mx-auto px-6 flex flex-col" style={{ minHeight: '100svh' }}>
         <div className="h-16 shrink-0" />
 
-        <motion.div
+        <m.div
           className="flex flex-col items-center text-center pt-12 pb-8"
           style={{ y: textY }}
         >
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.05 }}
@@ -528,7 +528,7 @@ export default function Hero() {
               </div>
               <div style={{ padding: '5px 14px', background: 'rgba(196,147,63,0.06)', overflow: 'hidden', minWidth: '148px' }}>
                 <AnimatePresence mode="wait">
-                  <motion.span
+                  <m.span
                     key={badgeIdx}
                     initial={{ opacity: 0, y: 7 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -538,13 +538,13 @@ export default function Hero() {
                     style={{ fontSize: '11px', color: 'rgba(196,147,63,0.85)', fontWeight: 500, display: 'block', whiteSpace: 'nowrap' }}
                   >
                     {BADGE_STATS[badgeIdx]}
-                  </motion.span>
+                  </m.span>
                 </AnimatePresence>
               </div>
             </div>
-          </motion.div>
+          </m.div>
 
-          <motion.h1
+          <m.h1
             className="font-heading font-normal text-center"
             style={{ maxWidth: '960px' } as CSSProperties}
             variants={containerVariants}
@@ -552,7 +552,7 @@ export default function Hero() {
             animate="visible"
           >
             <div className="overflow-hidden" style={{ paddingBottom: '4px' }}>
-              <motion.div variants={wordVariants} className="inline-flex gap-[0.28em]">
+              <m.div variants={wordVariants} className="inline-flex gap-[0.28em]">
                 {['The', 'Future', 'of'].map(word => (
                   <span
                     key={word}
@@ -566,10 +566,10 @@ export default function Hero() {
                     {word}
                   </span>
                 ))}
-              </motion.div>
+              </m.div>
             </div>
             <div className="overflow-hidden" style={{ paddingBottom: '2px' }}>
-              <motion.span
+              <m.span
                 variants={wordVariants}
                 className="inline-block"
                 style={{
@@ -580,10 +580,10 @@ export default function Hero() {
                 } as CSSProperties}
               >
                 KOL
-              </motion.span>
+              </m.span>
             </div>
             <div className="overflow-hidden" style={{ paddingBottom: '12px' }}>
-              <motion.span
+              <m.span
                 variants={wordVariants}
                 className="inline-block"
                 style={{
@@ -594,10 +594,10 @@ export default function Hero() {
                 } as CSSProperties}
               >
                 Management.
-              </motion.span>
+              </m.span>
             </div>
             <div className="overflow-hidden">
-              <motion.span
+              <m.span
                 variants={wordVariants}
                 className="inline-block"
                 style={{
@@ -610,11 +610,11 @@ export default function Hero() {
                 } as CSSProperties}
               >
                 Made Efficient.
-              </motion.span>
+              </m.span>
             </div>
-          </motion.h1>
+          </m.h1>
 
-          <motion.p
+          <m.p
             className="font-body mt-6"
             style={{ fontSize: 'clamp(15px, 1.4vw, 18px)', lineHeight: 1.7, color: 'var(--c-text-muted)', maxWidth: '460px' } as CSSProperties}
             initial={{ opacity: 0, y: 16 }}
@@ -623,9 +623,9 @@ export default function Hero() {
           >
             Satu platform. Semua kreator. Tanpa kekacauan{' '}
             <span style={{ color: 'rgba(239,68,68,0.60)', fontWeight: 600 }}>WhatsApp.</span>
-          </motion.p>
+          </m.p>
 
-          <motion.div
+          <m.div
             className="flex flex-wrap items-center justify-center gap-3 mt-8"
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
@@ -649,9 +649,9 @@ export default function Hero() {
               </div>
               Minta Demo
             </a>
-          </motion.div>
+          </m.div>
 
-          <motion.div
+          <m.div
             className="mt-8 w-full"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -687,10 +687,10 @@ export default function Hero() {
                 </span>
               ))}
             </div>
-          </motion.div>
-        </motion.div>
+          </m.div>
+        </m.div>
 
-        <motion.div
+        <m.div
           className="flex flex-col items-center pb-14"
           initial={{ opacity: 0, y: 60, scale: 0.97 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -700,18 +700,18 @@ export default function Hero() {
           <div className="mt-3" style={{ width: '520px', maxWidth: '100%' }}>
             <LiveToast />
           </div>
-        </motion.div>
+        </m.div>
 
-        <motion.div
+        <m.div
           className="shrink-0 flex justify-center pb-8"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 2.2, duration: 0.6 }}
         >
-          <motion.div animate={{ y: [0, 9, 0] }} transition={{ duration: 2.0, repeat: Infinity, ease: 'easeInOut' }}>
+          <m.div animate={{ y: [0, 9, 0] }} transition={{ duration: 2.0, repeat: Infinity, ease: 'easeInOut' }}>
             <ChevronDown size={18} style={{ color: 'var(--c-text-dim)' }} />
-          </motion.div>
-        </motion.div>
+          </m.div>
+        </m.div>
       </div>
     </section>
   )

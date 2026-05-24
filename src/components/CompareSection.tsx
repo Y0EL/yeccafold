@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import type { CSSProperties } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { m, AnimatePresence } from 'framer-motion'
 
 const CHAOS_MESSAGES = [
   { from: 'Rina', text: 'Kak mau tanya kontraknya yang mana?', time: '09:12', self: false },
@@ -166,7 +166,7 @@ export default function CompareSection() {
       />
 
       <div className="relative z-10 max-w-6xl mx-auto px-6">
-        <motion.div
+        <m.div
           className="mb-16 text-center"
           initial={{ opacity: 0, y: 28 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -198,9 +198,9 @@ export default function CompareSection() {
           >
             Tim KOL biasanya menghabiskan 3 jam per kreator untuk administrasi manual. yeccafold memangkasnya menjadi kurang dari 20 menit.
           </p>
-        </motion.div>
+        </m.div>
 
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
@@ -264,7 +264,7 @@ export default function CompareSection() {
             }}
           >
             <AnimatePresence mode="wait">
-              <motion.div
+              <m.div
                 key={view}
                 initial={{ opacity: 0, x: view === 'before' ? -20 : 20 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -285,10 +285,10 @@ export default function CompareSection() {
                   </span>
                 </div>
                 {view === 'before' ? <ChaosBefore /> : <OrderAfter />}
-              </motion.div>
+              </m.div>
             </AnimatePresence>
           </div>
-        </motion.div>
+        </m.div>
       </div>
     </section>
   )

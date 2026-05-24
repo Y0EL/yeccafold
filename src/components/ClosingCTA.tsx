@@ -1,5 +1,5 @@
 import type { CSSProperties } from 'react'
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 
 export default function ClosingCTA() {
   return (
@@ -35,7 +35,7 @@ export default function ClosingCTA() {
       />
 
       <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 32 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.4 }}
@@ -107,7 +107,7 @@ export default function ClosingCTA() {
               </div>
             ))}
           </div>
-        </motion.div>
+        </m.div>
       </div>
     </section>
   )

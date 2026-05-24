@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import type { CSSProperties } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { m, AnimatePresence } from 'framer-motion'
 
 const PLANS = [
   {
@@ -90,7 +90,7 @@ export default function PricingSection() {
       />
 
       <div className="relative z-10 max-w-6xl mx-auto px-6">
-        <motion.div
+        <m.div
           className="text-center mb-14"
           initial={{ opacity: 0, y: 28 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -171,11 +171,11 @@ export default function PricingSection() {
               })}
             </div>
           </div>
-        </motion.div>
+        </m.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 items-start">
           {PLANS.map((plan, i) => (
-            <motion.div
+            <m.div
               key={plan.name}
               initial={{ opacity: 0, y: 36 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -233,7 +233,7 @@ export default function PricingSection() {
 
               <div style={{ marginBottom: '8px' }}>
                 <AnimatePresence mode="wait">
-                  <motion.div
+                  <m.div
                     key={annual ? 'annual' : 'monthly'}
                     initial={{ opacity: 0, y: 8 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -248,7 +248,7 @@ export default function PricingSection() {
                     } as CSSProperties}
                   >
                     {formatRupiah(annual ? plan.annual : plan.monthly)}
-                  </motion.div>
+                  </m.div>
                 </AnimatePresence>
                 <div className="font-body" style={{ fontSize: '11px', color: 'var(--c-text-muted)', marginTop: '4px' }}>
                   per bulan{annual ? ', dibayar tahunan' : ''}
@@ -328,11 +328,11 @@ export default function PricingSection() {
               >
                 {plan.cta}
               </a>
-            </motion.div>
+            </m.div>
           ))}
         </div>
 
-        <motion.p
+        <m.p
           className="font-body text-center mt-10"
           style={{ fontSize: '12px', color: 'var(--c-text-muted)', lineHeight: 1.6 }}
           initial={{ opacity: 0 }}
@@ -341,7 +341,7 @@ export default function PricingSection() {
           transition={{ duration: 0.6, delay: 0.4 }}
         >
           Semua paket termasuk uji coba 14 hari tanpa biaya. Tidak perlu kartu kredit untuk memulai.
-        </motion.p>
+        </m.p>
       </div>
     </section>
   )

@@ -1,5 +1,5 @@
 import type { CSSProperties } from 'react'
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import { useRef } from 'react'
 
 function IconDoc() {
@@ -224,7 +224,7 @@ function QueueIllustration() {
 
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6px' }}>
         {jobs.map((job, i) => (
-          <motion.div
+          <m.div
             key={job.label}
             initial={{ opacity: 0, y: 8 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -256,7 +256,7 @@ function QueueIllustration() {
               <div style={{ fontSize: '11px', fontWeight: 700, color: 'var(--c-text)', fontFamily: 'Inter, sans-serif', letterSpacing: '-0.01em' }}>{job.label}</div>
               <div style={{ fontSize: '9px', color: 'var(--c-text-muted)', fontFamily: 'Inter, sans-serif', marginTop: '1px', lineHeight: 1.4 }}>{job.sub}</div>
             </div>
-          </motion.div>
+          </m.div>
         ))}
       </div>
     </div>
@@ -322,7 +322,7 @@ const FEATURES = [
 
 function FeatureCard({ feature, delay }: { feature: (typeof FEATURES)[0]; delay: number }) {
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
@@ -371,7 +371,7 @@ function FeatureCard({ feature, delay }: { feature: (typeof FEATURES)[0]; delay:
       <div style={{ flex: feature.tall ? 1 : 'none' }}>
         {feature.illustration}
       </div>
-    </motion.div>
+    </m.div>
   )
 }
 
@@ -391,7 +391,7 @@ export default function FeaturesSection() {
       />
 
       <div className="relative z-10 max-w-6xl mx-auto px-6">
-        <motion.div
+        <m.div
           className="mb-16"
           initial={{ opacity: 0, y: 28 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -425,7 +425,7 @@ export default function FeaturesSection() {
               Dari reachout hingga pembayaran, setiap langkah memiliki fitur yang dirancang khusus untuk tim KOL profesional.
             </p>
           </div>
-        </motion.div>
+        </m.div>
 
         <div className="features-grid">
           <div className="features-tall">

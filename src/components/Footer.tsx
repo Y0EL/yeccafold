@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import type { CSSProperties } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { m, AnimatePresence } from 'framer-motion'
 
 const LINKS = {
   Platform: [
@@ -53,7 +53,7 @@ function DemoForm() {
     >
       <AnimatePresence mode="wait">
         {!sent ? (
-          <motion.form
+          <m.form
             key="form"
             name="demo-request"
             initial={{ opacity: 1 }}
@@ -109,9 +109,9 @@ function DemoForm() {
             >
               {loading ? 'Mengirim...' : 'Kirim Permintaan'}
             </button>
-          </motion.form>
+          </m.form>
         ) : (
-          <motion.div
+          <m.div
             key="success"
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
@@ -129,7 +129,7 @@ function DemoForm() {
             <p className="font-body" style={{ fontSize: '12px', color: 'var(--c-text-muted)', lineHeight: 1.6 }}>
               Kami akan menghubungi {email} dalam 24 jam.
             </p>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
     </div>
@@ -149,7 +149,7 @@ export default function Footer() {
       />
 
       <div className="max-w-6xl mx-auto px-6">
-        <motion.div
+        <m.div
           className="py-20 flex flex-col lg:flex-row items-center lg:items-start justify-between gap-12"
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -210,7 +210,7 @@ export default function Footer() {
               </div>
             ))}
           </div>
-        </motion.div>
+        </m.div>
 
         <div
           style={{ borderTop: '1px solid var(--c-border)', padding: '24px 0', display: 'flex', flexDirection: 'column', gap: '12px' }}

@@ -1,5 +1,5 @@
 import type { CSSProperties } from 'react'
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 
 const TESTIMONIALS = [
   {
@@ -54,7 +54,7 @@ export default function TestimonialsSection() {
       />
 
       <div className="relative z-10 max-w-6xl mx-auto px-6">
-        <motion.div
+        <m.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 28 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -80,11 +80,11 @@ export default function TestimonialsSection() {
             <br />
             <em style={{ color: 'var(--c-accent)', fontStyle: 'italic' }}>merasakannya.</em>
           </h2>
-        </motion.div>
+        </m.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
           {TESTIMONIALS.map((t, i) => (
-            <motion.div
+            <m.div
               key={t.name}
               initial={{ opacity: 0, y: 32 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -166,7 +166,7 @@ export default function TestimonialsSection() {
                   {t.metric}
                 </div>
               </div>
-            </motion.div>
+            </m.div>
           ))}
         </div>
       </div>

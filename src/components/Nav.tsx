@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Menu, X } from 'lucide-react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { m, AnimatePresence } from 'framer-motion'
 
 const links = [
   { label: 'Platform', href: '#platform' },
@@ -71,7 +71,7 @@ export default function Nav() {
   }
 
   return (
-    <motion.header
+    <m.header
       className="fixed top-0 left-0 right-0 z-50"
       style={{
         background: scrolled ? 'var(--c-nav-scrolled)' : 'transparent',
@@ -105,7 +105,7 @@ export default function Nav() {
               >
                 {link.label}
                 {isActive && (
-                  <motion.div
+                  <m.div
                     layoutId="nav-indicator"
                     className="absolute bottom-0 left-0 right-0 h-[1.5px] rounded-full"
                     style={{ background: 'var(--c-accent)' }}
@@ -147,7 +147,7 @@ export default function Nav() {
 
       <AnimatePresence>
         {open && (
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: -6 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -6 }}
@@ -189,9 +189,9 @@ export default function Nav() {
                 </a>
               </div>
             </div>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
-    </motion.header>
+    </m.header>
   )
 }

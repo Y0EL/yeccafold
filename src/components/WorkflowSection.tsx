@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import type { CSSProperties } from 'react'
-import { motion, AnimatePresence, useInView } from 'framer-motion'
+import { m, AnimatePresence, useInView } from 'framer-motion'
 
 const STAGES = [
   { num: '01', label: 'Reachout', tagline: 'Temukan dan hubungi kreator yang tepat', metric: '3m', metricLabel: 'untuk briefing 100 kreator' },
@@ -154,7 +154,7 @@ function StageButton({
             </div>
             <AnimatePresence>
               {isActive && (
-                <motion.div
+                <m.div
                   initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: 'auto' }}
                   exit={{ opacity: 0, height: 0 }}
@@ -166,7 +166,7 @@ function StageButton({
                   >
                     {s.tagline}
                   </p>
-                </motion.div>
+                </m.div>
               )}
             </AnimatePresence>
           </div>
@@ -186,7 +186,7 @@ function StageButton({
           </div>
           <AnimatePresence>
             {isActive && (
-              <motion.div
+              <m.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
@@ -198,7 +198,7 @@ function StageButton({
                 >
                   {s.metricLabel}
                 </div>
-              </motion.div>
+              </m.div>
             )}
           </AnimatePresence>
         </div>
@@ -270,7 +270,7 @@ function DashboardMockup({ active }: { active: number }) {
             const isHighlighted = row.stageIdx === active
             const color = STAGE_COLORS[row.stageIdx]
             return (
-              <motion.div
+              <m.div
                 key={row.seed}
                 animate={{ background: isHighlighted ? 'rgba(196,147,63,0.06)' : '#ffffff' }}
                 transition={{ duration: 0.4 }}
@@ -317,7 +317,7 @@ function DashboardMockup({ active }: { active: number }) {
                 <span className="hidden sm:block shrink-0" style={{ fontSize: '10px', color: '#94a3b8', fontFamily: 'Inter, sans-serif' }}>
                   {row.updated}
                 </span>
-              </motion.div>
+              </m.div>
             )
           })}
         </div>
@@ -387,7 +387,7 @@ export default function WorkflowSection() {
       />
 
       <div className="relative z-10 max-w-6xl mx-auto px-6">
-        <motion.div
+        <m.div
           className="mb-16"
           initial={{ opacity: 0, y: 28 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -421,10 +421,10 @@ export default function WorkflowSection() {
               Dari kontak pertama hingga pembayaran lunas. Semua kreator terpantau. Semua kontrak tersimpan. Semua invoice terkirim tepat waktu.
             </p>
           </div>
-        </motion.div>
+        </m.div>
 
         <div className="flex flex-col lg:flex-row gap-5 items-start">
-          <motion.div
+          <m.div
             className="w-full lg:w-[340px] shrink-0 flex flex-col"
             initial={{ opacity: 0, x: -24 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -441,9 +441,9 @@ export default function WorkflowSection() {
                 onSelect={handleClick}
               />
             ))}
-          </motion.div>
+          </m.div>
 
-          <motion.div
+          <m.div
             className="w-full lg:flex-1 min-w-0"
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -451,7 +451,7 @@ export default function WorkflowSection() {
             transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
           >
             <DashboardMockup active={active} />
-          </motion.div>
+          </m.div>
         </div>
       </div>
     </section>

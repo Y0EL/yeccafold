@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import type { CSSProperties } from 'react'
-import { motion, useInView } from 'framer-motion'
+import { m, useInView } from 'framer-motion'
 
 const STATS = [
   { value: 500, suffix: '+', label: 'Kreator Terkelola', sub: 'Dalam satu platform terpusat' },
@@ -59,7 +59,7 @@ export default function StatsSection() {
       />
 
       <div className="relative z-10 max-w-6xl mx-auto px-6">
-        <motion.div
+        <m.div
           className="text-center mb-20"
           initial={{ opacity: 0, y: 28 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -85,7 +85,7 @@ export default function StatsSection() {
             <br />
             <em style={{ color: 'var(--c-accent)', fontStyle: 'italic' }}>diukur.</em>
           </h2>
-        </motion.div>
+        </m.div>
 
         <div
           className="grid grid-cols-2 md:grid-cols-4 gap-px"
@@ -97,7 +97,7 @@ export default function StatsSection() {
           }}
         >
           {STATS.map((stat, i) => (
-            <motion.div
+            <m.div
               key={stat.label}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -142,11 +142,11 @@ export default function StatsSection() {
               >
                 {stat.sub}
               </div>
-            </motion.div>
+            </m.div>
           ))}
         </div>
 
-        <motion.div
+        <m.div
           className="mt-20 flex flex-col lg:flex-row items-center justify-between gap-8"
           style={{
             padding: '40px 48px',
@@ -195,7 +195,7 @@ export default function StatsSection() {
               Lihat Alur Kerja
             </a>
           </div>
-        </motion.div>
+        </m.div>
       </div>
     </section>
   )
