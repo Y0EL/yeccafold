@@ -1,5 +1,5 @@
-const CACHE = 'yeccafold-v1'
-const APP_SHELL = ['/', '/index.html', '/favicon.svg', '/site.webmanifest', '/og-image.png']
+const CACHE = 'yeccafold-v2'
+const APP_SHELL = ['/', '/index.html', '/favicon.svg', '/site.webmanifest']
 
 self.addEventListener('install', (event) => {
   event.waitUntil(

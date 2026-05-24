@@ -42,22 +42,32 @@ export default function Nav() {
 
   useEffect(() => {
     const sectionIds = ['platform', 'workflow', 'features', 'compare', 'stats', 'harga', 'cta', 'contact']
-    const observers: IntersectionObserver[] = []
+    let observers: IntersectionObserver[] = []
 
-    sectionIds.forEach(id => {
-      const el = document.getElementById(id)
-      if (!el) return
-      const obs = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) setActiveSection(id)
-        },
-        { rootMargin: '-20% 0px -60% 0px' }
-      )
-      obs.observe(el)
-      observers.push(obs)
-    })
+    const setup = () => {
+      observers.forEach(o => o.disconnect())
+      observers = []
+      sectionIds.forEach(id => {
+        const el = document.getElementById(id)
+        if (!el) return
+        const obs = new IntersectionObserver(
+          ([entry]) => {
+            if (entry.isIntersecting) setActiveSection(id)
+          },
+          { rootMargin: '-20% 0px -60% 0px' }
+        )
+        obs.observe(el)
+        observers.push(obs)
+      })
+    }
 
-    return () => observers.forEach(o => o.disconnect())
+    setup()
+    window.addEventListener('yf:sections-ready', setup)
+
+    return () => {
+      window.removeEventListener('yf:sections-ready', setup)
+      observers.forEach(o => o.disconnect())
+    }
   }, [])
 
   const toggleTheme = () => {
