@@ -1,4 +1,4 @@
-const RECIPIENT = process.env.MAIL_TO || 'yoelandreasmanoppo@gmail.com'
+const RECIPIENTS = (process.env.MAIL_TO || 'yoelandreasmanoppo@gmail.com').split(',').map(s => s.trim()).filter(Boolean)
 const FROM = process.env.MAIL_FROM || 'yeccafold <onboarding@resend.dev>'
 const HIDDEN_FIELDS = new Set(['form-name', 'bot-field'])
 
@@ -138,7 +138,7 @@ export const handler = async (event) => {
       },
       body: JSON.stringify({
         from: FROM,
-        to: [RECIPIENT],
+        to: RECIPIENTS,
         reply_to: primaryEmail || undefined,
         subject: primaryEmail ? `Permintaan demo baru dari ${primaryEmail}` : 'Permintaan demo baru di yeccafold',
         html,
